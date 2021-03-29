@@ -198,122 +198,27 @@ wk()->addOutput(categoryNoMatch_SubleadingTruth);
 categoryLeptonsAndJets_SubleadingTruth = new TH1F("categoryLeptonsAndJets_SubleadingTruth", "categoryLeptonsAndJets_SubleadingTruth", 50, 0., 1.);
 wk()->addOutput(categoryLeptonsAndJets_SubleadingTruth);
     
-jetMass = new TH1F("jetMass", "jetMass", 100, 0., 500.);
-wk()->addOutput(jetMass);
+//Kinematics of true leptons and reconstructed matched electron (truth leading goes into leptons)
+m_TrueLeadGoesIntoLeptons_TrueLeadingPt = new TH1F("m_TrueLeadGoesIntoLeptons_TrueLeadingPt", "m_TrueLeadGoesIntoLeptons_TrueLeadingPt", 50, 0., 5000.);
+  wk()->addOutput(m_TrueLeadGoesIntoLeptons_TrueLeadingPt);  
+
+m_TrueLeadGoesIntoLeptons_TrueLeadingEta = new TH1F("m_TrueLeadGoesIntoLeptons_TrueLeadingEta", "m_TrueLeadGoesIntoLeptons_TrueLeadingEta", 25, -2.5, 2.5);
+  wk()->addOutput(m_TrueLeadGoesIntoLeptons_TrueLeadingEta); 
     
-jetPt = new TH1F("jetPt ", "jetPt", 100, 0., 5000.);
-wk()->addOutput(jetPt);
+m_TrueLeadGoesIntoLeptons_RecoElMatchedPt = new TH1F("m_TrueLeadGoesIntoLeptons_RecoElMatchedPt", "m_TrueLeadGoesIntoLeptons_RecoElMatchedPt", 50, 0., 5000.);
+  wk()->addOutput(m_TrueLeadGoesIntoLeptons_RecoElMatchedPt); 
     
-dRTwoTrueLeptons_catGoesIntoJet = new TH1F("dRTwoTrueLeptons_catGoesIntoJet", "dRTwoTrueLeptons_catGoesIntoJet", 50, 0., 1.);
-wk()->addOutput(dRTwoTrueLeptons_catGoesIntoJet);
+m_TrueLeadGoesIntoLeptons_RecoElMatchedEta = new TH1F("m_TrueLeadGoesIntoLeptons_RecoElMatchedEta", "m_TrueLeadGoesIntoLeptons_RecoElMatchedEta", 25, -2.5, 2.5);
+wk()->addOutput(m_TrueLeadGoesIntoLeptons_RecoElMatchedEta); 
+
+//resolutions (truth leading goes into leptons)
+m_TrueLeadGoesIntoLeptons_1d_resolution = new TH1F("m_TrueLeadGoesIntoLeptons_1d_resolution", "m_TrueLeadGoesIntoLeptons_1d_resolution", 500, 0., 2.);
+wk()->addOutput(m_TrueLeadGoesIntoLeptons_1d_resolution);
     
-dRl1Jet_catGoesIntoJet = new TH1F("dRl1Jet_catGoesIntoJet", "dRl1Jet_catGoesIntoJet", 50, 0., 1.);
-wk()->addOutput(dRl1Jet_catGoesIntoJet);
-    
-dRl2Jet_catGoesIntoJet = new TH1F("dRl2Jet_catGoesIntoJet", "dRl2Jet_catGoesIntoJet", 50, 0., 1.);
-wk()->addOutput(dRl2Jet_catGoesIntoJet);
-    
-Ptleading_catGoesIntoJet = new TH1F("Ptleading_catGoesIntoJet", "Ptleading_catGoesIntoJet", 100, 0., 5000.);
-wk()->addOutput(Ptleading_catGoesIntoJet);
-    
-PtSubleading_catGoesIntoJet = new TH1F("PtSubleading_catGoesIntoJet", "PtSubleading_catGoesIntoJet", 100, 0., 5000.);
-wk()->addOutput(PtSubleading_catGoesIntoJet);
-    
-leptonsGoesIntoLeptons_leading_resolution = new TH1F("leptonsGoesIntoLeptons_leading_resolution", "leptonsGoesIntoLeptons_leading_resolution", 100, 0., 2.);
-wk()->addOutput(leptonsGoesIntoLeptons_leading_resolution);
-    
-leptonsGoesIntoLeptons_subleading_resolution = new TH1F("leptonsGoesIntoLeptons_subleading_resolution", "leptonsGoesIntoLeptons_subleading_resolution", 100, 0., 2.);
-wk()->addOutput(leptonsGoesIntoLeptons_subleading_resolution);
-    
-dR_twoTrueLeptons = new TH1F("dR_twoTrueLeptons", "dR_twoTrueLeptons", 100, 0., 1.);
-wk()->addOutput(dR_twoTrueLeptons);
+m_TrueLeadGoesIntoLeptons_2d_resolution = new TH2F("m_TrueLeadGoesIntoLeptons_2d_resolution", "m_TrueLeadGoesIntoLeptons_2d_resolution", 50, 0., 2., 50, 0., 2.);
+wk()->addOutput(m_TrueLeadGoesIntoLeptons_2d_resolution); 
     
 
-truthLeading_2Dresolution = new TH2F("truthLeading_2Dresolution", "truthLeading_2Dresolution", 100, 0.4, 1.2, 100, 0.8, 1.6);
-wk()->addOutput(truthLeading_2Dresolution);  
-    
-truthSubLeading_2Dresolution = new TH2F("truthSubLeading_2Dresolution", "truthSubLeading_2Dresolution", 100, 0.4, 1.2, 100, 0.8, 1.6);
-wk()->addOutput(truthSubLeading_2Dresolution); 
-    
-leadGoesLeptons_cluster = new TH1F("leadGoesLeptons_cluster", "leadGoesLeptons_cluster", 100, 0., 5000.);
-wk()->addOutput(leadGoesLeptons_cluster);
-    
-subleadGoesLeptons_cluster = new TH1F("subleadGoesLeptons_cluster", "subleadGoesLeptons_cluster", 100, 0., 5000.);
-wk()->addOutput(subleadGoesLeptons_cluster);
-
-
-bothTrueLeptons_cluster = new TH1F("bothTrueLeptons_cluster", "bothTrueLeptons_cluster", 100, 0., 5000.);
-wk()->addOutput(bothTrueLeptons_cluster);
-
-leadGoesLeptons_RecoCluster = new TH1F("leadGoesLeptons_RecoCluster", "leadGoesLeptons_RecoCluster", 100, 0., 5000.);
-wk()->addOutput(leadGoesLeptons_RecoCluster);
-    
-jetTrackLeading_GoesIntoJet = new TH1F("jetTrackLeading_GoesIntoJet", "jetTrackLeading_GoesIntoJet", 100, 0., 5000.);
-wk()->addOutput(jetTrackLeading_GoesIntoJet);
-    
-jetTrackSubLeading_GoesIntoJet = new TH1F("jetTrackSubLeading_GoesIntoJet", "jetTrackSubLeading_GoesIntoJet", 100, 0., 5000.);
-wk()->addOutput(jetTrackSubLeading_GoesIntoJet);
-    
-dR_jetTracks_bothTracks = new TH1F("dR_jetTracks_bothTracks", "dR_jetTracks_bothTracks", 100, 0., 1.);
-wk()->addOutput(dR_jetTracks_bothTracks);
-    
-trkFoundLeading_NoMatch = new TH1F("trkFoundLeading_NoMatch", "trkFoundLeading_NoMatch", 100, 0., 5000.);
-wk()->addOutput(trkFoundLeading_NoMatch);
-    
-trkFoundSubLeading_NoMatch = new TH1F("trkFoundSubLeading_NoMatch", "trkFoundSubLeading_NoMatch", 100, 0., 5000.);
-wk()->addOutput(trkFoundSubLeading_NoMatch);
-    
-dR_diTrks = new TH1F("dR_diTrks", "dR_diTrks", 100, 0., 1.);
-wk()->addOutput(dR_diTrks);
-    
-leadingLinkedTruthParticle_GoesIntoLeptons_Pt = new TH1F("leadingLinkedTruthParticle_GoesIntoLeptons_Pt", "leadingLinkedTruthParticle_GoesIntoLeptons_Pt", 100, 0., 5000.);
-wk()->addOutput(leadingLinkedTruthParticle_GoesIntoLeptons_Pt);
-    
-leadingLinkedTruthParticle_GoesIntoLeptons_Eta = new TH1F("leadingLinkedTruthParticle_GoesIntoLeptons_Eta", "leadingLinkedTruthParticle_GoesIntoLeptons_Eta", 25, 0., 2.5);
-wk()->addOutput(leadingLinkedTruthParticle_GoesIntoLeptons_Eta);
-    
-leadingTruthParticle_GoesIntoLeptons_Pt = new TH1F("leadingTruthParticle_GoesIntoLeptons_Pt", "leadingTruthParticle_GoesIntoLeptons_Pt", 100, 0., 5000.);
-wk()->addOutput(leadingTruthParticle_GoesIntoLeptons_Pt);
-    
-leadingTruthParticle_GoesIntoLeptons_Eta = new TH1F("leadingTruthParticle_GoesIntoLeptons_Eta", "leadingTruthParticle_GoesIntoLeptons_Eta", 25, 0., 2.5);
-wk()->addOutput(leadingTruthParticle_GoesIntoLeptons_Eta);
-
-mtrk1trk2 = new TH1F("mtrk1trk2", "mtrk1trk2", 40, 0., 200);
-wk()->addOutput(mtrk1trk2);
-    
-h_1dResolution_NoMatch = new TH1F("h_1dResolution_NoMatch", "h_1dResolution_NoMatch", 100, 0., 2.);
-wk()->addOutput(h_1dResolution_NoMatch);
-    
-h_2dResolution_NoMatch = new TH2F("h_2dResolution_NoMatch", "h_2dResolution_NoMatch", 50, 0., 2., 50, 0., 2.);
-wk()->addOutput(h_2dResolution_NoMatch); 
-    
-h_sumOfTrue_NoMatch = new TH1F("h_sumOfTrue_NoMatch", "h_sumOfTrue_NoMatch", 100, 0., 5000.);
-wk()->addOutput(h_sumOfTrue_NoMatch);
-    
-//new ones    
-m_passingPrecut_truthZleadingpT = new TH1F("m_passingPrecut_truthZleadingpT", "m_passingPrecut_truthZleadingpT", 100, 0., 5000.);
-wk()->addOutput(m_passingPrecut_truthZleadingpT);
-
-m_passingPrecut_truthZSubleadingpT = new TH1F("m_passingPrecut_truthZSubleadingpT", "m_passingPrecut_truthZSubleadingpT", 100, 0., 5000.);
-wk()->addOutput(m_passingPrecut_truthZSubleadingpT);
-    
-dR_twoTrueLeptons_PassPrecuts = new TH1F("dR_twoTrueLeptons_PassPrecuts", "dR_twoTrueLeptons_PassPrecuts", 100, 0., 1.);
-wk()->addOutput(dR_twoTrueLeptons_PassPrecuts);
-    
-hLead_matchViaFunction_recoMatched_Pt = new TH1F("hLead_matchViaFunction_recoMatched_Pt", "hLead_matchViaFunction_recoMatched_Pt", 100, 0., 5000.);
-wk()->addOutput(hLead_matchViaFunction_recoMatched_Pt);
-
-hLead_matchLeptons_trueLead_Pt = new TH1F("hLead_matchLeptons_trueLead_Pt", "hLead_matchLeptons_trueLead_Pt", 100, 0., 5000.);
-wk()->addOutput(hLead_matchLeptons_trueLead_Pt);
-    
-hLead_matchLeptons_recoMatched_Pt = new TH1F("hLead_matchLeptons_recoMatched_Pt", "hLead_matchLeptons_recoMatched_Pt", 100, 0., 5000.);
-wk()->addOutput(hLead_matchLeptons_recoMatched_Pt);
-    
-hLead_matchLeptons_1d_resolution = new TH1F("hLead_matchLeptons_1d_resolution", "hLead_matchLeptons_1d_resolution", 500, 0., 2.);
-wk()->addOutput(hLead_matchLeptons_1d_resolution);
-    
-hLead_matchLeptons_2d_resolution = new TH2F("hLead_matchLeptons_2d_resolution", "hLead_matchLeptons_2d_resolution", 50, 0., 2., 50, 0., 2.);
-wk()->addOutput(hLead_matchLeptons_2d_resolution); 
     
 //new ones    
 hSubLead_matchViaFunction_recoMatched_Pt = new TH1F("hSubLead_matchViaFunction_recoMatched_Pt", "hSubLead_matchViaFunction_recoMatched_Pt", 100, 0., 5000.);
@@ -1508,13 +1413,11 @@ void H2ZyAnalysis::fillCutFlow(CutEnum cut,  TString sysname, double w)
 H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
 {
 
-	//timeval t1;
-	//gettimeofday(&t1, NULL);
-	//std::cout<<"what's the time ? before cutflow = " << t1.tv_usec << std::endl; 
+	
 
 	m_cutFlow = initialcutflow();
 	if(m_cutFlow!=Initial_sel) {return m_cutFlow;}
-	//return m_cutFlow;
+	
 
 	all_correctedphotons = m_eventfill.all_photon_container(photonHandler());
 	photons = m_eventfill.photon_container(photonHandler());
@@ -1664,36 +1567,34 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
     
         nevts_before++;
         
-        double dEta_true = m_new_truthLeptonsFromZ.at(0)->eta() - m_new_truthLeptonsFromZ.at(1)->eta();
-        double dPhi_true = m_new_truthLeptonsFromZ.at(0)->phi() - m_new_truthLeptonsFromZ.at(1)->phi();
-        dPhi_true = (dPhi_true <=M_PI)? dPhi_true : 2*M_PI-dPhi_true;
-        double dR_true = sqrt( pow(dEta_true,2) + pow(dPhi_true,2) );
+        //dR for two true leptons (no precut)
+        double dEta = m_new_truthLeptonsFromZ.at(0)->eta() - m_new_truthLeptonsFromZ.at(1)->eta();
+        double dPhi = m_new_truthLeptonsFromZ.at(0)->phi() - m_new_truthLeptonsFromZ.at(1)->phi();
+        dPhi = (dPhi <=M_PI)? dPhi : 2*M_PI-dPhi;
+        double dR = sqrt( pow(dEta,2) + pow(dPhi,2) );
+        m_dR_TrueLeptons->Fill(dR);
         
-        dR_twoTrueLeptons->Fill(dR_true);
+        //two true leptons kinematics (no precut)
+        m_TrueLeptons_LeadingPt->Fill(m_new_truthLeptonsFromZ.at(0)->pt()/1000);
+        m_TrueLeptons_SubLeadingPt->Fill(m_new_truthLeptonsFromZ.at(1)->pt()/1000);
         
-        m_noPrecut_truthZleadingpT->Fill(m_new_truthLeptonsFromZ.at(0)->pt()/1000);
-        //cout<<" leading pt " << m_new_truthLeptonsFromZ.at(0)->pt()/1000 << " barcode " << m_new_truthLeptonsFromZ.at(0)->barcode() << endl;
-        m_noPrecut_truthZSubleadingpT->Fill(m_new_truthLeptonsFromZ.at(1)->pt()/1000);
-        //cout<<" sub-leading pt " << m_new_truthLeptonsFromZ.at(1)->pt()/1000 << " barcode " << m_new_truthLeptonsFromZ.at(1)->barcode() << endl;
+        m_TrueLeptons_LeadingEta->Fill(m_new_truthLeptonsFromZ.at(0)->eta());
+        m_TrueLeptons_SubLeadingEta->Fill(m_new_truthLeptonsFromZ.at(1)->eta());
         
-        TLorentzVector l1, l2;
-        l1.SetPtEtaPhiM(m_new_truthLeptonsFromZ.at(0)->pt(), m_new_truthLeptonsFromZ.at(0)->eta(), m_new_truthLeptonsFromZ.at(0)->phi(), m_new_truthLeptonsFromZ.at(0)->m());
-        l2.SetPtEtaPhiM(m_new_truthLeptonsFromZ.at(1)->pt(), m_new_truthLeptonsFromZ.at(1)->eta(), m_new_truthLeptonsFromZ.at(1)->phi(), m_new_truthLeptonsFromZ.at(1)->m());
+        //Precut true leptons
+        bool truthLeadPassPrecut = truePassPreCut(m_new_truthLeptonsFromZ.at(0));
+        bool truthSubLeadPassPrecut = truePassPreCut(m_new_truthLeptonsFromZ.at(1));
         
-        double ml1l2 = (l1 + l2).M();
-        m_truthZleptons_mass->Fill(ml1l2/1000);
-        
-        if((m_new_truthLeptonsFromZ.at(0)->pt()/1000 > 10. && fabs(m_new_truthLeptonsFromZ.at(0)->eta()) < 2.47) && (m_new_truthLeptonsFromZ.at(1)->pt()/1000 > 10. && fabs(m_new_truthLeptonsFromZ.at(1)->eta()) < 2.47))
+        if(truthLeadPassPrecut && truthSubLeadPassPrecut)
         {
-            double dEta_true = m_new_truthLeptonsFromZ.at(0)->eta() - m_new_truthLeptonsFromZ.at(1)->eta();
-            double dPhi_true = m_new_truthLeptonsFromZ.at(0)->phi() - m_new_truthLeptonsFromZ.at(1)->phi();
-            dPhi_true = (dPhi_true <=M_PI)? dPhi_true : 2*M_PI-dPhi_true;
-            double dR_true = sqrt( pow(dEta_true,2) + pow(dPhi_true,2) );
-            dR_twoTrueLeptons_PassPrecuts->Fill(dR_true);   
+            m_dR_TrueLeptons_PreCuts->Fill(dR);
             
-            m_passingPrecut_truthZleadingpT->Fill(m_new_truthLeptonsFromZ.at(0)->pt()/1000);
-            m_passingPrecut_truthZSubleadingpT->Fill(m_new_truthLeptonsFromZ.at(1)->pt()/1000);
-            
+            //two true leptons kinematics (no precut)
+            m_TrueLeptons_LeadingPt_Precut->Fill(m_new_truthLeptonsFromZ.at(0)->pt()/1000);
+            m_TrueLeptons_SubLeadingPt_Precut->Fill(m_new_truthLeptonsFromZ.at(1)->pt()/1000);
+        
+            m_TrueLeptons_LeadingEta_Precut->Fill(m_new_truthLeptonsFromZ.at(0)->eta());
+            m_TrueLeptons_SubLeadingEta_Precut->Fill(m_new_truthLeptonsFromZ.at(1)->eta());
         }
         
         
@@ -1718,7 +1619,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
         double res_2d_l1 = 0;
         
         //leading lepton
-        if( m_new_truthLeptonsFromZ.at(0)->pt()/1000 > 10. && fabs(m_new_truthLeptonsFromZ.at(0)->eta()) < 2.47 )
+        if( truthLeadPassPrecut )
         {
             nevts_after_lead++;
             
@@ -1733,39 +1634,33 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
             // CHECK MATCHING LEPTONS
             //==========================
             vector<xAOD::Electron*> elTruthMatched = match_DR_electrons(m_new_truthLeptonsFromZ.at(0), all_correctedelectrons);    
+            
             if(elTruthMatched.size())
-            {
                 matchLeptons_dR = true;
-                
-                recoHasMatchedLeading = elTruthMatched.at(0);
-                hasRecoMatchedLead = true;
-            } 
             
             //==========================
             // CHECK MATCHING JETS
             //==========================
             vector<xAOD::Jet*> jetTruthMatched = match_DR_jet(m_new_truthLeptonsFromZ.at(0), loose_jets);
             if(jetTruthMatched.size())
-            {
-                cout<<" truth matched jet pT " << jetTruthMatched.at(0)->pt()/1000 << endl;
                 MatchedJet = true;
-            } 
         
-            if( elTruthMatched.size() ) removedMatchToLeading = skipRecoMatchedToTrueLeading(elTruthMatched.at(0), all_correctedelectrons);
-            else cout<<" truth el matching with true leading electron not found! " << endl;
+            //if( elTruthMatched.size() ) removedMatchToLeading = skipRecoMatchedToTrueLeading(elTruthMatched.at(0), all_correctedelectrons);
+            //else cout<<" truth el matching with true leading electron not found! " << endl;
            
             
             //=======================================================
             // COUNTING NUMBER OF EVENTS IN EACH INDIVIDUAL RECO TYPE
             //=======================================================
-            
-            if(!matchLeptons_dR && !MatchedJet) Nomatch = true;
-        
+              
+            //True leading goes into leptons
             if(matchLeptons_dR)
             {
                 
                 matchLep_lead = true;
                 isCat_LeadingGoesIntoLeptons = true;
+                
+                
                 nEvts_matchLeptons++;
                 
                 //category fraction vs dR histogram
@@ -1778,41 +1673,40 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 
                 //truth leading electron pT
                 double trueLep_Pt = m_new_truthLeptonsFromZ.at(0)->pt()/1000;
-                hLead_matchLeptons_trueLead_Pt->Fill(trueLep_Pt);
+                double trueLep_Eta = m_new_truthLeptonsFromZ.at(0)->eta();
+                m_TrueLeadGoesIntoLeptons_TrueLeadingPt->Fill(trueLep_Pt);
+                m_TrueLeadGoesIntoLeptons_TrueLeadingEta->Fill(trueLep_Eta);
                 
                 //reco Matched electron pT
                 double recoMatched_Pt = elTruthMatched.at(0)->pt()/1000;
-                hLead_matchLeptons_recoMatched_Pt->Fill(recoMatched_Pt);
+                double recoMatched_Eta = elTruthMatched.at(0)->eta();
+                m_TrueLeadGoesIntoLeptons_RecoElMatchedPt->Fill(recoMatched_Pt);
+                m_TrueLeadGoesIntoLeptons_RecoElMatchedEta->Fill(recoMatched_Eta);
                 
-                recoMatched_l1 = elTruthMatched.at(0);
                 
                 //leading electron resolution
                 double resolution = recoMatched_Pt/trueLep_Pt;                
                 
-                res_l1 = resolution;
-                
                 
                 //2d fraction
                 TLorentzVector lep1, lep2;
+                
                 
                 lep1.SetPtEtaPhiM(m_new_truthLeptonsFromZ.at(0)->pt(), m_new_truthLeptonsFromZ.at(0)->eta(), m_new_truthLeptonsFromZ.at(0)->phi(), m_new_truthLeptonsFromZ.at(0)->m());
                 
                 lep2.SetPtEtaPhiM(m_new_truthLeptonsFromZ.at(1)->pt(), m_new_truthLeptonsFromZ.at(1)->eta(), m_new_truthLeptonsFromZ.at(1)->phi(), m_new_truthLeptonsFromZ.at(1)->m());
                 
                 TLorentzVector sumTrueLeptons = lep1 + lep2;
-                
                 double res2d = recoMatched_Pt/(sumTrueLeptons.Pt()/1000);
-                
-                res_2d_l1 = res2d;
-                
-                cout<<" leading resolution " << resolution << " res2d  " << res2d  << endl;
+               
+                //cout<<" leading resolution " << resolution << " res2d  " << res2d  << endl;
             
-                hLead_matchLeptons_1d_resolution->Fill(resolution);
-                hLead_matchLeptons_2d_resolution->Fill(res2d, resolution);
+                m_TrueLeadGoesIntoLeptons_1d_resolution->Fill(resolution);
+                m_TrueLeadGoesIntoLeptons_2d_resolution->Fill(res2d, resolution);
                 
-                cout<<" Sum 4-mom true leptons " << sumTrueLeptons.Pt()/1000 << " 1d res " <<  resolution << " 2d res " << res2d << endl;
+                //cout<<" Sum 4-mom true leptons " << sumTrueLeptons.Pt()/1000 << " 1d res " <<  resolution << " 2d res " << res2d << endl;
                 
-                if(resolution > 0.99 && resolution < 1.01) hLead_matchLeptons_1d_InsideresolutionWindow->Fill(resolution);
+                if(resolution > 0.99 && resolution < 1.01)  hLead_matchLeptons_1d_InsideresolutionWindow->Fill(resolution);
                 else
                 {
                     hLead_matchLeptons_outsideResWindow_Pt->Fill(trueLep_Pt);  
@@ -1876,11 +1770,12 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 
                 
             } 
+            
+            //True leading goes into leptons only
             if(matchLeptons_dR && !MatchedJet )
-            {
                 nEvts_IsmatchedLeptonOnly++;
-                
-            } 
+            
+            //True leading goes into jets
             if(!matchLeptons_dR && MatchedJet)
             {
                 nEvts_matchJets++;
@@ -1891,6 +1786,8 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 double dR = sqrt( pow(dEta,2) + pow(dPhi,2) );
                 categoryJets_leadingTruth->Fill(dR);
             } 
+            
+            //True leading goes nothing (noMatch)
             if(!matchLeptons_dR && !MatchedJet)
             {
                 nEvts_NoMatch++;
@@ -1902,7 +1799,8 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 categoryNoMatch_leadingTruth->Fill(dR);
                 
             } 
-            //if(matchLeptons_dR && matchedLeptonCheckWithJets_dR) nEvts_matchLeptonsAndJets++;
+            
+            //True leading goes leptons + jets
             if(matchLeptons_dR && MatchedJet)
             {
                 nEvts_matchLeptonsAndJets++;
@@ -1920,6 +1818,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
         }
         
         //subleading lepton
+        /*
         if( m_new_truthLeptonsFromZ.at(1)->pt()/1000 > 10. && fabs(m_new_truthLeptonsFromZ.at(1)->eta()) < 2.47 )
         {
             nevts_after_sublead++;
@@ -2050,7 +1949,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 
                 
                 
-                /*
+                //COMMENT BEGIN
                 if(isCat_LeadingGoesIntoLeptons)
                 {
                     if(hasRecoMatchedLead)
@@ -2093,7 +1992,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                         } 
                     } 
                 }
-                */
+                //COMMENT END
                 
            
               
@@ -2213,7 +2112,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
             {
                 
                 cout<<" SUBLEP GOES INTO JET " << endl;
-                /*
+                
                 double pT_res = ( ((jetMatchedMinDR->pt()/1000) - (m_new_truthLeptonsFromZ.at(1)->pt()/1000))/(m_new_truthLeptonsFromZ.at(1)->pt()/1000) );
                 
                 //cout<< " matched jet pT " << matched_jet->pt()/1000 << " truth sub-leading pT " << m_new_truthLeptonsFromZ.at(1)->pt()/1000 << " pT res " <<  pT_res << endl;
@@ -2357,12 +2256,13 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 double dR_l2Jet = sqrt( pow(dEta_l2Jet,2) + pow(dPhi_l2Jet,2) );
                 
                 dRl2Jet_catGoesIntoJet->Fill(dR_l2Jet);
-                */
+                
                 
                 
             }
             
         }
+        */
       
         /*
         if(matchLep_lead  && matchLep_sublead)
@@ -2839,6 +2739,13 @@ bool H2ZyAnalysis::isTruthLepton(const xAOD::Electron *el)
     return false;    
   } 
   else return true;
+}
+
+bool truePassPreCut(const xAOD::TruthParticle* true_lepton)
+{
+    if( true_lepton->pt()/1000 > 10. && fabs(true_lepton->eta()) < 2.47 )
+        return true;
+    else return false;
 }
 
 
