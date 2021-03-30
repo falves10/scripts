@@ -219,6 +219,19 @@ m_TrueLeadGoesIntoLeptons_2d_resolution = new TH2F("m_TrueLeadGoesIntoLeptons_2d
 wk()->addOutput(m_TrueLeadGoesIntoLeptons_2d_resolution); 
     
 
+m_TrueLeadGoesIntoLeptons_dR_l1AndReco = new TH1F("m_TrueLeadGoesIntoLeptons_dR_l1AndReco", "m_TrueLeadGoesIntoLeptons_dR_l1AndReco", 100, 0, 1.);
+  wk()->addOutput(m_TrueLeadGoesIntoLeptons_dR_l1AndReco);
+    
+m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_1d = new TH1F("m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_1d", "m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_1d", 500, 0., 2.);
+wk()->addOutput(m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_1d);
+    
+m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_2d = new TH2F("m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_2d", "m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_2d", 50, 0., 2., 50, 0., 2.);
+wk()->addOutput(m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_2d);
+ 
+m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_dR =  new TH1F("m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_dR", "m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_dR", 100, 0, 1.);
+  wk()->addOutput(m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_dR);
+    
+
     
 //new ones    
 hSubLead_matchViaFunction_recoMatched_Pt = new TH1F("hSubLead_matchViaFunction_recoMatched_Pt", "hSubLead_matchViaFunction_recoMatched_Pt", 100, 0., 5000.);
@@ -495,6 +508,10 @@ EL::StatusCode H2ZyAnalysis::finalize ()
     cout<<" n_SubLeadIntoLeptons_l1RecoMatch " << n_SubLeadIntoLeptons_l1RecoMatch << endl;
     cout<<" Events in the vertical strip "<< n_evts_strip << endl;
     cout<<" Events in the vertical strip (TSL matches same reco) "<< n_LeadIntoLeptons_Strip_l2RecoMatch << endl;
+    cout<< " n_evts_TrueSub_Out " << n_evts_TrueSub_Out << endl;
+    cout<< " n_evts_TrueSub_In " << n_evts_TrueSub_In << endl;
+    cout<<" nEvts_strip_trueSubPassPreCut " << nEvts_strip_trueSubPassPreCut << endl;
+    
     
     
     
@@ -726,9 +743,11 @@ EL::StatusCode H2ZyAnalysis::execute()
   cout<< " EVENT: " << nEvents << " mc_Z_decay_topo " << m_ieventmap["mc_Z_decay_topo"] << endl;
   cout<<"**************************************************************" << endl;
 
+  cout<<"teste10"<<endl;
   bool do251 = false;
-  if( nEvents == 320 ) do251 = true;
+  //if( nEvents == 320 ) do251 = true;
   nEvents++;
+  cout<<"teste20"<<endl;
 
 
   // Define containers for storing good particles
@@ -760,7 +779,7 @@ EL::StatusCode H2ZyAnalysis::execute()
 	  //if(!sysname.BeginsWith("JET_")) continue;
 	  if(sysname!="") applySystematicVariation(sys);
 		
-      cout<<" do251 " << do251 << endl;
+      //cout<<" do251 " << do251 << endl;
       
 	  m_cutFlow = cutflow(sysname, do251);
 
@@ -873,7 +892,7 @@ EL::StatusCode H2ZyAnalysis::execute()
 	  // eventHandler()->storeVar("pT_yy2", 1.0);
 
   }//end of the systematics loop
-
+  cout<<"teste30"<<endl;
 
   if(!is_goodevent) { store()->clear();  return EL::StatusCode::SUCCESS; }
 
@@ -904,7 +923,7 @@ EL::StatusCode H2ZyAnalysis::execute()
      }
     //HG::VarHandler::getInstance()->write(); // do not call without calling fill()
   }
-
+  cout<<"teste40"<<endl;
   // write object containers - do not call without calling fill() ! - this is why this is commented.
   //CP_CHECK("execute()", photonHandler  ()->writeContainer(S_photons , m_photonContainerName ));
   //CP_CHECK("execute()", electronHandler()->writeContainer(S_electrons, m_elecContainerName));
@@ -1446,7 +1465,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
     vector<const xAOD::TruthParticle*> m_new_truthLeptonsFromZ = m_truthselector.TruthLeptonsFromZ() ;
     
     m_Zleptons->Fill(m_new_truthLeptonsFromZ.size());
-    
+    cout<<"test1"<<endl;
     for ( auto electron : m_preSelElectrons )
     //for ( auto electron : all_correctedelectrons )
     {
@@ -1551,7 +1570,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
         }
         
     }
-    
+    cout<<"test2"<<endl;
     
     
     //cout<<" number of all reco electrons: " << all_correctedelectrons.size() << endl;
@@ -1564,7 +1583,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
     //Reco type with leading and sub-leading lepton
     if(m_new_truthLeptonsFromZ.size() > 0)
     {
-    
+        cout<<"test3"<<endl;
         nevts_before++;
         
         //dR for two true leptons (no precut)
@@ -1584,19 +1603,19 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
         //Precut true leptons
         bool truthLeadPassPrecut = truePassPreCut(m_new_truthLeptonsFromZ.at(0));
         bool truthSubLeadPassPrecut = truePassPreCut(m_new_truthLeptonsFromZ.at(1));
-        
+        cout<<"test4"<<endl;
         if(truthLeadPassPrecut && truthSubLeadPassPrecut)
         {
             m_dR_TrueLeptons_PreCuts->Fill(dR);
             
             //two true leptons kinematics (no precut)
-            m_TrueLeptons_LeadingPt_Precut->Fill(m_new_truthLeptonsFromZ.at(0)->pt()/1000);
-            m_TrueLeptons_SubLeadingPt_Precut->Fill(m_new_truthLeptonsFromZ.at(1)->pt()/1000);
+            m_TrueLeptons_LeadingPt_PreCuts->Fill(m_new_truthLeptonsFromZ.at(0)->pt()/1000);
+            m_TrueLeptons_SubLeadingPt_PreCuts->Fill(m_new_truthLeptonsFromZ.at(1)->pt()/1000);
         
-            m_TrueLeptons_LeadingEta_Precut->Fill(m_new_truthLeptonsFromZ.at(0)->eta());
-            m_TrueLeptons_SubLeadingEta_Precut->Fill(m_new_truthLeptonsFromZ.at(1)->eta());
+            m_TrueLeptons_LeadingEta_PreCuts->Fill(m_new_truthLeptonsFromZ.at(0)->eta());
+            m_TrueLeptons_SubLeadingEta_PreCuts->Fill(m_new_truthLeptonsFromZ.at(1)->eta());
         }
-        
+        cout<<"test5"<<endl;
         
         double matchLep_lead = false;
         double matchLep_sublead = false;
@@ -1617,7 +1636,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
         
         double res_l1 = 0;
         double res_2d_l1 = 0;
-        
+        cout<<"test6"<<endl;
         //leading lepton
         if( truthLeadPassPrecut )
         {
@@ -1648,7 +1667,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
             //if( elTruthMatched.size() ) removedMatchToLeading = skipRecoMatchedToTrueLeading(elTruthMatched.at(0), all_correctedelectrons);
             //else cout<<" truth el matching with true leading electron not found! " << endl;
            
-            
+            cout<<"test7"<<endl;
             //=======================================================
             // COUNTING NUMBER OF EVENTS IN EACH INDIVIDUAL RECO TYPE
             //=======================================================
@@ -1706,6 +1725,60 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 
                 //cout<<" Sum 4-mom true leptons " << sumTrueLeptons.Pt()/1000 << " 1d res " <<  resolution << " 2d res " << res2d << endl;
                 
+                double dEta_l1 = m_new_truthLeptonsFromZ.at(0)->eta() -  elTruthMatched.at(0)->eta();
+                double dPhi_l1 = m_new_truthLeptonsFromZ.at(0)->phi() - elTruthMatched.at(0)->phi();
+                dPhi_l1 = (dPhi_l1<=M_PI)? dPhi_l1 : 2*M_PI-dPhi_l1;
+                double dR_l1 = sqrt( pow(dEta_l1,2) + pow(dPhi_l1,2) );
+                
+                m_TrueLeadGoesIntoLeptons_dR_l1AndReco->Fill(dR_l1);
+                
+                //How often the truth matched electron (with truth leading) ALSO truth match the truth sub-leading
+                n_evts_TrueSub_Out++;
+                bool isPassPreCut = truePassPreCut(m_new_truthLeptonsFromZ.at(1));
+                if(isPassPreCut)
+                {
+                    n_evts_TrueSub_In++;
+                    double dEta_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->eta() -  elTruthMatched.at(0)->eta();
+                    double dPhi_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->phi() -  elTruthMatched.at(0)->phi();
+                    dPhi_l2RecoMatch = (dPhi_l2RecoMatch <= M_PI)? dPhi_l2RecoMatch : 2*M_PI-dPhi_l2RecoMatch;
+                    double dR_l2RecoMatch = sqrt( pow(dEta_l2RecoMatch,2) + pow(dPhi_l2RecoMatch,2) );
+                    
+                    if( dR_l2RecoMatch < 0.1)
+                    {
+                        n_LeadIntoLeptons_l2RecoMatch++;
+                        
+                        m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_1d->Fill(resolution);
+                        m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_2d->Fill(res2d, resolution);
+                        m_TrueLeadGoesIntoLeptons_recoTruthMatchedByTrueSub_dR->Fill(dR_l2RecoMatch);
+                        
+                    } 
+                }
+                
+                //How much events fall into the strip between 0.95-1.05 (2d x-axis ratio)
+                if( res2d > 0.95 && res2d < 1.05)
+                {
+                    n_evts_strip++;
+                    if(isPassPreCut) nEvts_strip_trueSubPassPreCut++;
+                    
+                    /*
+                    double dEta_strip = m_new_truthLeptonsFromZ.at(1)->eta() -  elTruthMatched.at(0)->eta();
+                    double dPhi_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->phi() -  elTruthMatched.at(0)->phi();
+                    dPhi_l2RecoMatch = (dPhi_l2RecoMatch <= M_PI)? dPhi_l2RecoMatch : 2*M_PI-dPhi_l2RecoMatch;
+                    double dR_l2RecoMatch = sqrt( pow(dEta_l2RecoMatch,2) + pow(dPhi_l2RecoMatch,2) );
+                    
+                    if( dR_l2RecoMatch < 0.1)
+                    {
+                        n_LeadIntoLeptons_Strip_l2RecoMatch++;
+                        
+                        hLead_matchLeptons_1d_resolution_Strip->Fill(resolution);
+                        hLead_matchLeptons_2d_resolution_Strip->Fill(res2d, resolution);
+                        
+                    } 
+                    */
+                    
+                }
+                
+                
                 if(resolution > 0.99 && resolution < 1.01)  hLead_matchLeptons_1d_InsideresolutionWindow->Fill(resolution);
                 else
                 {
@@ -1726,45 +1799,6 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                     hLead_matchLeptons_2d_resolution_Below0p99->Fill(res2d, resolution);
                 }
                 
-                if( res2d > 0.95 && res2d < 1.05)
-                {
-                    n_evts_strip++;
-                    
-                    double dEta_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->eta() -  elTruthMatched.at(0)->eta();
-                    double dPhi_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->phi() -  elTruthMatched.at(0)->phi();
-                    dPhi_l2RecoMatch = (dPhi_l2RecoMatch <= M_PI)? dPhi_l2RecoMatch : 2*M_PI-dPhi_l2RecoMatch;
-                    double dR_l2RecoMatch = sqrt( pow(dEta_l2RecoMatch,2) + pow(dPhi_l2RecoMatch,2) );
-                    
-                    if( dR_l2RecoMatch < 0.1)
-                    {
-                        n_LeadIntoLeptons_Strip_l2RecoMatch++;
-                        
-                        hLead_matchLeptons_1d_resolution_Strip->Fill(resolution);
-                        hLead_matchLeptons_2d_resolution_Strip->Fill(res2d, resolution);
-                        
-                    } 
-                    
-                }
-                
-                res_lead = resolution;
-                
-                //On these events where the truth-leading matches a reconstructed electron, check how much truth-subleading passing pre-selection matches the same reconstructed electron
-                if(m_new_truthLeptonsFromZ.at(1)->pt()/1000 > 10. && fabs(m_new_truthLeptonsFromZ.at(1)->eta()) < 2.47)
-                {
-                    double dEta_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->eta() -  elTruthMatched.at(0)->eta();
-                    double dPhi_l2RecoMatch = m_new_truthLeptonsFromZ.at(1)->phi() -  elTruthMatched.at(0)->phi();
-                    dPhi_l2RecoMatch = (dPhi_l2RecoMatch <= M_PI)? dPhi_l2RecoMatch : 2*M_PI-dPhi_l2RecoMatch;
-                    double dR_l2RecoMatch = sqrt( pow(dEta_l2RecoMatch,2) + pow(dPhi_l2RecoMatch,2) );
-                    
-                    if( dR_l2RecoMatch < 0.1)
-                    {
-                        n_LeadIntoLeptons_l2RecoMatch++;
-                        
-                        hLead_matchLeptons_1d_resolution_doubleCount->Fill(resolution);
-                        hLead_matchLeptons_2d_resolution_doubleCount->Fill(res2d, resolution);
-                        
-                    } 
-                }
                 
                 
                 
@@ -1813,7 +1847,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 
             } 
             
-            
+            cout<<"test8"<<endl;
             
         }
         
@@ -2741,7 +2775,7 @@ bool H2ZyAnalysis::isTruthLepton(const xAOD::Electron *el)
   else return true;
 }
 
-bool truePassPreCut(const xAOD::TruthParticle* true_lepton)
+bool H2ZyAnalysis::truePassPreCut(const xAOD::TruthParticle* true_lepton)
 {
     if( true_lepton->pt()/1000 > 10. && fabs(true_lepton->eta()) < 2.47 )
         return true;
