@@ -25,24 +25,26 @@ TH1F *h;
 ofstream myfile;
 myfile.open ("new_example.txt");
 
-bool useParamsFromFile = true;
+bool useParamsFromFile = false;
 TString type = "data";
 
-Int iEta = 4;
-Int iEnergy = 10;
-Int iBias =  16;
+int iEta = 15;
+int iEnergy = 10;
+int iBias =  16;
     
 //c->Divide(2,2);
-for(int i = 3;i < iEta; i++)
+for(int i = 14;i < iEta; i++)
 {
     for(int j = 0; j < iEnergy; j++)
     {
         for(int k = 0; k < iBias ;k++)
         {
+            if(i == 13 && j > 6) continue;
+            
             TCanvas *c = new TCanvas();
             gStyle->SetOptFit(1111);
             
-            if(type = "data")
+            if(type == "data")
                 h = (TH1F *)f_in->Get(Form("%s_eta_%d_energy_%d_bias%d",type.Data(), i, j, k)); // data
             else h = (TH1F *)f_in->Get(Form("mc_eta_%d_energy_%d_bias0",i, j));
                 
@@ -64,10 +66,29 @@ for(int i = 3;i < iEta; i++)
                }
                else
                {
-                   f2->SetParameters(2751.33, 1.00918, 0.0653444, -0.700741, 1.66549);
+                   if( j == 0 )
+                        f2->SetParameters(54927.8, 0.992018, 0.0413628, -1.04522, 2.72838 );    
+                    else if ( j == 1 )
+                        f2->SetParameters(155586, 0.996261, 0.0414388, -0.905716, 2.53711 ); 
+                    else if ( j == 2 )      
+                        f2->SetParameters(232059, 0.99981, 0.0427053, -0.815207, 2.28122 );
+                    else if ( j == 3 )
+                        f2->SetParameters(222901, 0.995381, 0.0438607, -0.74959, 2.10982 );
+                    else if ( j == 4 )
+                        f2->SetParameters(155332, 0.998958, 0.0460873, -0.701446, 1.99597 );
+                    else if ( j == 5 )
+                        f2->SetParameters(85932.3, 1.00334, 0.0483657, -0.660556, 1.94629);
+                    else if ( j == 6 )
+                        f2->SetParameters(6240.41, 1.01171, 0.102057, -0.487528, 10);
+                    else if ( j == 7 )
+                        f2->SetParameters(1766.06, 1.00542, 0.114861, -0.54016, 10);
+                    else if ( j == 8 )
+                        f2->SetParameters(440.618, 1.04499, 0.177589, -0.76414, 1);
+                    else if ( j == 9 )
+                        f2->SetParameters(227.886, 1.00697, 0.176707, -0.725403, 1);
                }
                
-               if(type = "data")
+               if(type == "data")
                {
                    f2->SetParLimits(0, 0.,1e10);      
                    f2->SetParLimits(1,0.8,1.2);
@@ -89,7 +110,7 @@ for(int i = 3;i < iEta; i++)
 	
 	       h->Fit("f2", "r");
 
-	       c->SaveAs(Form("./out_nominal/mc_eta%d_energy%d_bias%d.pdf", i, j, k));
+	       c->SaveAs(Form("./out_nominal/eta%d_energy%d_bias%d.pdf", i, j, k));
 
  	       TString status_fit = gMinuit->fCstatu;           
  	       myfile << " fit status " << status_fit << " eta" << i << " energy" << j << " bias" << k << " " << f2->GetParameter(0) << " " << f2->GetParameter(1) << " " << f2->GetParameter(2) << " " << f2->GetParameter(3) << " " << f2->GetParameter(4) << endl;             
@@ -449,7 +470,7 @@ TString bias = Form("bias%d",k);
 
 //cout<<"teste1"<<endl;
 
-TString path = "/publicfs/atlas/atlasnew/higgs/hgg/fabiolucio/EgammCalibration/Codes_ntuples/condor/calibrated_m_eOverp/Histograms/merge_test/data_nominal_eta_2_3.txt";
+TString path = "/publicfs/atlas/atlasnew/higgs/hgg/fabiolucio/EgammCalibration/Codes_ntuples/condor/calibrated_m_eOverp/Histograms/merge_test/data_nominal_eta_14.txt";
 
 ifstream file( path  );
 
