@@ -744,7 +744,7 @@ EL::StatusCode H2ZyAnalysis::execute()
   cout<<"**************************************************************" << endl;
 
   cout<<"teste10"<<endl;
-  bool do251 = false;
+  //bool do251 = false;
   //if( nEvents == 320 ) do251 = true;
   nEvents++;
   cout<<"teste20"<<endl;
@@ -781,7 +781,8 @@ EL::StatusCode H2ZyAnalysis::execute()
 		
       //cout<<" do251 " << do251 << endl;
       
-	  m_cutFlow = cutflow(sysname, do251);
+	  //m_cutFlow = cutflow(sysname, do251);
+      m_cutFlow = cutflow(sysname);
 
 	  //Info("execute", "end cutflow");
 	  var::cutFlow.setValue(m_cutFlow);
@@ -1429,7 +1430,7 @@ void H2ZyAnalysis::fillCutFlow(CutEnum cut,  TString sysname, double w)
 }
 
 
-H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
+H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname)
 {
 
 	
@@ -1468,7 +1469,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
     cout<<"test1"<<endl;
     for ( auto electron : m_preSelElectrons )
     //for ( auto electron : all_correctedelectrons )
-    {
+    /*{
         n_totRecoPreSelElectrons++;
         m_allLeptons_RecoLeptonpT->Fill(electron->pt()/1000);
         m_allLeptons_RecoLeptonEta->Fill(electron->eta());
@@ -1569,7 +1570,7 @@ H2ZyAnalysis::CutEnum H2ZyAnalysis::cutflow(TString sysname, bool do251)
                 
         }
         
-    }
+    }*/
     cout<<"test2"<<endl;
     
     
