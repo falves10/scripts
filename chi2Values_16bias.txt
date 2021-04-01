@@ -1,0 +1,5 @@
+var = eOverp      eta bin = 0   alpha min = 1.0029   error:   0.000337552
+var = eOverp      eta bin = 1   alpha min = 0.978074   error:   0.000660151
+var = eOverp      eta bin = 2   alpha min = 0.999683   error:   0.000901339
+var = eOverp      eta bin = 3   alpha min = 1.08028   error:   0.00206949
+var = eOverp      eta bin = 4   alpha min = 0.995455   error:   0.0220362
