@@ -29,39 +29,23 @@ myfile.open ("new_example.txt");
 //c->Divide(2,2);
 for(int i = 0;i < 15; i++)
 {
-    //if( i > 1 ) continue;
     for(int j = 0; j < 10; j++)
     {
-	//if( j > 8 ) continue;	    
-     //function to run MC
-     //runMC(f_in, i, j, myfile ); 
-     for(int k = 0; k < 16 ;k++)
+        for(int k = 0; k < 16 ;k++)
         {
-          
-	if( k !=  0 ) continue; 
-	TCanvas *c = new TCanvas();
-	gStyle->SetOptFit(1111);
-	//h = (TH1F *)f_in->Get(Form("data_eta_%d_energy_%d_bias%d",i, j, k)); // data
-        h = (TH1F *)f_in->Get(Form("mc_eta_%d_energy_%d_bias0",i, j));
-        cout<<"eta, energy, bias " << i << " " << j << " " << k << endl; 
-        cout<<h->GetMean()<<" " << h->GetRMS() << endl;
-	h->Draw();
+            TCanvas *c = new TCanvas();
+            gStyle->SetOptFit(1111);
+	       //h = (TH1F *)f_in->Get(Form("data_eta_%d_energy_%d_bias%d",i, j, k)); // data
+            h = (TH1F *)f_in->Get(Form("mc_eta_%d_energy_%d_bias0",i, j));
+            cout<<"eta, energy, bias " << i << " " << j << " " << k << endl; 
+            cout<<h->GetMean()<<" " << h->GetRMS() << endl;
+	       h->Draw();
 
-	TF1 *f2 = new TF1("f2","crystalball",0.9,1.3);
+	       TF1 *f2 = new TF1("f2","crystalball",0.9,1.3);
 
-
-	//EL NOMINAL
-	/*if( i == 0 )		
-  		f2->SetParameters( 1.93671e+05 ,  h->GetMean()   , 0.04  , -1  , 2 );
-	else if( i == 1 ){
-		if( j <= 5 )
-			f2->SetParameters( 1.93671e+05 ,  0.99   , 0.05  , -2  , 2 );   	
-		else f2->SetParameters( 1.93671e+05 ,  0.98   , 0.09  , -2  , 2 );
-	}*/
-
-	if(h->GetEntries() < 1000) continue;
-	else
-	{
+	       if(h->GetEntries() < 1000) continue;
+	       else
+	       {
 
 		//f2->SetParameters(1, h->GetMean()  , 0.01 , -1 , 2 );
  		/* MC nominal
@@ -177,106 +161,19 @@ f2->SetParLimits(4,1.,10);
 			f2->SetParameters( 1.93671e+05 ,  h->GetMean()   , 0.08  , -1  , 2 );
 		*/
 	}
-	//EL data17
-	/*if( i == 0 )
-                f2->SetParameters( 1.93671e+05 ,  h->GetMean()   , 0.04  , -1  , 2 );
-        else if( i == 1 ){
-               	f2->SetParameters( 1.93671e+05 ,  0.99   , 0.04  , -2  , 2 );
-        }
-	
-	*/
-
-	//FMX Nominal
-	/*if( i == 0 )
-                f2->SetParameters( 1.93671e+05 ,  h->GetMean()   , 0.04  , -1  , 2 );
-        else if( i == 1 || i == 2 ){
-                f2->SetParameters( 1.93671e+05 ,  0.99   , 0.04  , -2  , 2 );
-        }*/
-	
-
-	//FMX data17/Nominal N/data17 N/ Nominal IBL/data17 IBL/ Nominal PP0/ data17 PP0	
-	/*if( i == 0 )
-                f2->SetParameters( 1.93671e+05 ,  h->GetMean()   , 0.04  , -1  , 2 );
-        else if( i == 1 || i == 2 ){
-                if(j == 0 ) f2->SetParameters( 1.93671e+05 ,  0.99   , 0.04  , -2  , 2 );
-                else f2->SetParameters( 4.86729e+02   ,  0.95   , 3.86985e-02 ,  -1.54955e-01   ,  1.00000e+01 ); 
-        }
-	*/
-	
-	
-	//A
-	//f2->SetParameters( 1.93671e+05 , 1.0   , 0.09  , -1  , 2 );
-
-
-
-
-	//else 
-	//	f2->SetParameters( 1.93671e+05 ,  h->GetMean()   , 0.06  , -0.1  , 2 );
-
-		
-	/*
-
-	      if( i == 0 )
-	      {
-	      		if( j == 0 ) f2->SetParameters( 660966, 0.989419, 0.0474078, -0.973404, 2.55337 );
-			else if ( j == 1 )f2->SetParameters( 1.74807e+06, 0.992168, 0.0479095, -0.842334, 2.29657 );
-			else if ( j == 2 )f2->SetParameters( 659037, 0.991867, 0.0475169, -0.966261, 2.60489 );
-			else if ( j == 3 )f2->SetParameters( 657564, 0.993127, 0.047652, -0.965299, 2.62153 );
-			else if ( j == 4 )f2->SetParameters( 655981, 0.994421, 0.0478284, -0.967282, 2.62008 );
-			else if ( j == 5 )f2->SetParameters( 654226, 0.995748, 0.0480402, -0.97051, 2.61502);
-			else if ( j == 6 )f2->SetParameters( 652360, 0.997093, 0.0482683, -0.974531, 2.60533);
-			else if ( j == 7 )f2->SetParameters( 650593, 0.998445, 0.0484976, -0.97906, 2.59266 );
-			else if ( j == 8 )f2->SetParameters( 648779, 0.999827, 0.0487502, -0.985361, 2.5725);
-			else if ( j == 9 )f2->SetParameters( 646947, 1.00122, 0.0490155, -0.992352, 2.54795);
-	      }
-
-	*/
-
-	       //vector<double> par = params(i, j, k);
-	       //f2->SetParameters( par[0], par[1], par[2], par[3], par[4]);
-	     
-
-              /* 
-	      if( j ==  7 || j == 8 || j == 9 )
-	      	f2->SetParLimits(0,0.,1e6);	
-	      else
-	      {
-			if( i == 0 ||  i == 1 || i == 2 )
-				f2->SetParLimits(0, 0.,1000);
-			else f2->SetParLimits(0, 0.,1e10);	
-	      }
-	      f2->SetParLimits(1,0.8,1.2);
-              f2->SetParLimits(2,0.01,0.5);
-              f2->SetParLimits(3,-10.,10.);
-              f2->SetParLimits(4,1.,10);
-	      */
-
 	
 	       h->Fit("f2", "r");
 
 	       c->SaveAs(Form("./out_nominal/mc_eta%d_energy%d_bias%d.pdf", i, j, k));
 
-	      
-	       //Double_t chi2 = f2->GetChisquare();
-	       //cout<<" CHI2 " << chi2 << endl;
-               //cout<<" print parameters " << f2->GetParameter(0) <<" " << f2->GetParameter(1) << " " << f2->GetParameter(2) << " "<< f2->GetParameter(3) << f2->GetParameter(4) << endl;
- 	       
  	       TString status_fit = gMinuit->fCstatu;           
  	       myfile << " fit status " << status_fit << " eta" << i << " energy" << j << " bias" << k << " " << f2->GetParameter(0) << " " << f2->GetParameter(1) << " " << f2->GetParameter(2) << " " << f2->GetParameter(3) << " " << f2->GetParameter(4) << endl;             
-
-          //runMC(f_in, i, j, k, f2->GetParameter(0), f2->GetParameter(1), f2->GetParameter(2), f2->GetParameter(3), f2->GetParameter(4));
-          
-
-        //}
-    }
+        }
     }
       
 }
 
 myfile.close();
-    
-//c->Print("example.pdf");
-
 
 }
 
